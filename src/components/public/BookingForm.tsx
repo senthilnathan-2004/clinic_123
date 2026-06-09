@@ -127,13 +127,10 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm<BookingInput>({
     resolver: zodResolver(bookingSchema),
   });
-
-  const selectedDoctorId = watch("doctorId");
 
   const onSubmit = async (data: BookingInput) => {
     setIsSubmitting(true);
@@ -186,7 +183,7 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
         transition={{ duration: 0.5 }}
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        
+
         <div className="text-center mb-12 flex flex-col gap-3">
           <h2 className="text-base font-bold text-secondary tracking-widest uppercase font-outfit">Appointment</h2>
           <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-outfit">
@@ -216,7 +213,7 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              
+
               {error && (
                 <div className="bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 p-4 rounded-xl flex items-center gap-3 border border-rose-100 dark:border-rose-950">
                   <AlertCircle size={20} />
@@ -225,7 +222,7 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
               )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                
+
                 {/* Full Name */}
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 font-outfit">
@@ -235,9 +232,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                     type="text"
                     placeholder="Enter your name"
                     {...register("name")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.name ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.name ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   />
                   {errors.name && <span className="text-xs text-rose-500">{errors.name.message}</span>}
                 </div>
@@ -251,9 +247,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                     type="tel"
                     placeholder="Enter 10-digit mobile number"
                     {...register("phone")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.phone ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   />
                   {errors.phone && <span className="text-xs text-rose-500">{errors.phone.message}</span>}
                 </div>
@@ -267,9 +262,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                     type="email"
                     placeholder="yourname@example.com"
                     {...register("email")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.email ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   />
                   {errors.email && <span className="text-xs text-rose-500">{errors.email.message}</span>}
                 </div>
@@ -281,9 +275,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                   </label>
                   <select
                     {...register("doctorId")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.doctorId ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.doctorId ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   >
                     <option value="">-- Choose Doctor --</option>
                     {doctors.map((doc) => (
@@ -304,9 +297,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                     type="date"
                     min={new Date().toISOString().split("T")[0]}
                     {...register("date")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.date ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.date ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   />
                   {errors.date && <span className="text-xs text-rose-500">{errors.date.message}</span>}
                 </div>
@@ -318,9 +310,8 @@ export function BookingForm({ doctors }: { doctors: any[] }) {
                   </label>
                   <select
                     {...register("time")}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.time ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
-                    } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.time ? "border-rose-500" : "border-slate-200 dark:border-slate-700"
+                      } bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm`}
                   >
                     <option value="">-- Choose Time --</option>
                     {timeSlots.map((slot) => (
