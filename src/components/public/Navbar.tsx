@@ -12,7 +12,7 @@ const navLinks = [
   { label: "FAQ",     href: "/#faq" },
   { label: "Blog",    href: "/#blog" },
   { label: "Contact", href: "/#contact" },
-  { label: "Admin",   href: "/admin/dashboard" },
+  { label: "Admin",   href: "/admin/login" },
 ];
 
 export function Navbar({ settings, compact = false }: { settings: any; compact?: boolean }) {

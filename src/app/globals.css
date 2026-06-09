@@ -199,11 +199,32 @@
 #splash-screen .splash-dot:nth-child(3) { animation-delay: 0.32s; }
 
 #splash-screen.hide {
-  animation: splash-fade-out 0.4s ease-out forwards;
+  animation: splash-fade-out 0.3s ease-out forwards;
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+.ticker-track {
+  animation: ticker-scroll 25s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* ─── Smooth scroll ─────────────────────────────────────────── */
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 /* ─── Hide Google Translate bar ─────────────────────────────── */
 .goog-te-banner-frame,

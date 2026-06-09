@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/db";
 import { Gallery } from "@/lib/models/schemas";
 import { getServerSession } from "next-auth";
+import { revalidatePublicCache } from "@/lib/revalidate";
 
 export async function GET(request: Request) {
   try {
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
     await dbConnect();
 
     const image = await Gallery.create(body);
+    revalidatePublicCache();
     return NextResponse.json(image, { status: 201 });
   } catch (error) {
     console.error("Failed to add image to gallery:", error);
@@ -48,6 +50,7 @@ export async function DELETE(request: Request) {
     const image = await Gallery.findByIdAndDelete(id);
     if (!image) return NextResponse.json({ error: "Image not found" }, { status: 404 });
 
+    revalidatePublicCache();
     return NextResponse.json({ success: true, message: "Image deleted successfully from gallery" });
   } catch (error) {
     console.error("Failed to delete image from gallery:", error);

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/db";
 import { ClinicSettings } from "@/lib/models/schemas";
 import { getServerSession } from "next-auth";
+import { revalidatePublicCache } from "@/lib/revalidate";
 
 export async function GET() {
   try {
@@ -36,6 +37,7 @@ export async function POST(request: Request) {
       await settings.save();
     }
 
+    revalidatePublicCache();
     return NextResponse.json(settings);
   } catch (error) {
     console.error("Failed to update settings:", error);

@@ -1,30 +1,30 @@
 import React from "react";
-import Link from "next/link";
 import { dbConnect } from "@/lib/db";
-import { Service, ClinicSettings } from "@/lib/models/schemas";
+import { Service } from "@/lib/models/schemas";
+import { getClinicSettings } from "@/lib/data";
 import { Navbar } from "@/components/public/Navbar";
 import { Footer } from "@/components/public/Footer";
 import { AllServicesGrid } from "@/components/public/AllServicesGrid";
 import { EmergencyCall } from "@/components/public/EmergencyCall";
 
-export const revalidate = 30;
+export const revalidate = 60;
 
 export default async function ServicesPage() {
   await dbConnect();
-  const services = await Service.find().lean();
-  const settings = await ClinicSettings.findOne().lean();
 
-  const safeServices = JSON.parse(JSON.stringify(services));
-  const safeSettings = JSON.parse(JSON.stringify(settings || {}));
+  const [services, settings] = await Promise.all([
+    Service.find().lean(),
+    getClinicSettings(),
+  ]);
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar settings={safeSettings} compact />
+      <Navbar settings={settings ?? {}} compact />
       <main className="flex-grow pt-24 pb-20 bg-background bg-dot-pattern">
-        <AllServicesGrid services={safeServices} />
+        <AllServicesGrid services={services} />
       </main>
-      <Footer settings={safeSettings} />
-      <EmergencyCall settings={safeSettings} />
+      <Footer settings={settings ?? {}} />
+      <EmergencyCall settings={settings ?? {}} />
     </div>
   );
 }
